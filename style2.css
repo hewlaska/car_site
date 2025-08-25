@@ -1,0 +1,91 @@
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 15px;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  text-align: center;
+}
+
+.modal-content {
+  display: inline-block;
+  margin-top: 50px;
+  width: 800px;
+  height: 600px;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.image {
+  background-image: url("images/c20.png");
+  background-size: cover; /* или contain, если хотите вписать */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 650px; /* задай высоту */
+}
+
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.modal-nav span {
+  cursor: pointer;
+  font-size: 60px;
+  color: white;
+  padding: 0 20px;
+  user-select: none;
+  transition: 0.3s;
+}
+
+.modal-nav span:hover {
+  color: #ccc;
+}
+
+@media (max-width: 1024px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
