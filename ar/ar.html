@@ -3,7 +3,7 @@
 
 <head>
     <title>AR Model</title>
-    <link rel="icon" href="data:,">
+    <link rel="icon" type="image/png" href="images/logo.png">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
     <style>
@@ -29,15 +29,16 @@
 <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs="sourceType: webcam; cameraParametersUrl: camera_para.dat; debugUIEnabled: false;">
         <!-- Камера -->
-        <a-marker type="pattern" url="pattern.patt">
+        <a-marker type="pattern" url="ar/marker.patt">
             <!-- 3D модель -->
-            <a-entity gltf-model="ar.glb" scale="0.5 0.5 0.5" position="0 0 0" rotation="0 0 0">
+            <a-entity gltf-model="ar/ar.glb" scale="0.5 0.5 0.5" position="0 0 0" rotation="0 0 0">
             </a-entity>
         </a-marker>
+        <a-entity camera></a-entity>
     </a-scene>
 
     <!-- Ссылка в нижнем левом углу -->
-    <a href="https://hewlaska.github.io/car_site/" id="myLink" target="_blank">Go to website</a>
+    <a href="index.html" id="myLink" target="_blank">Go to WebSite</a>
 </body>
 
 </html>
