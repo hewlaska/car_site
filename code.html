@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>AR Marker — ar.glb на pattern-marker.patt</title>
+
+    <!-- A-Frame и AR.js (через CDN) -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+
+    <style>
+      html, body { margin: 0; padding: 0; height: 100%; background:#000; }
+      .hint {
+        position: fixed; inset: auto 0 0 0; color: #fff; font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial;
+        background: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.6));
+        padding: 12px 14px; text-align: center; z-index: 10;
+      }
+      .hint b { color: #fff; }
+      .topbar {
+        position: fixed; inset: 0 0 auto 0; display:flex; justify-content:center; align-items:center; z-index:10;
+        color:#fff; padding:10px; text-shadow:0 1px 12px rgba(0,0,0,.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">Наведите камеру на ваш маркер</div>
+
+    <!--
+      Положите рядом с этим файлом два ресурса:
+      - pattern-marker.patt
+      - ar.glb
+      И откройте страницу по HTTPS (GitHub Pages это обеспечивает).
+    -->
+
+    <a-scene
+      renderer="colorManagement: true; physicallyCorrectLights: true"
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;"
+    >
+      <a-assets timeout="15000">
+        <a-asset-item id="model" src="./ar.glb" response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+      </a-assets>
+
+      <!-- Маркер по вашему паттерну -->
+      <a-marker type="pattern" url="./pattern-marker.patt">
+        <!-- Настройте позицию/масштаб/поворот под вашу модель -->
+        <a-entity
+          gltf-model="#model"
+          position="0 0 0"
+          rotation="0 0 0"
+          scale="0.5 0.5 0.5"
+          shadow="cast: true; receive: true"
+        ></a-entity>
+
+        <!-- Немного света, чтобы модель выглядела лучше -->
+        <a-entity light="type: hemisphere; intensity: 1; color: #ffffff; groundColor: #999999" position="0 2 0"></a-entity>
+        <a-entity light="type: directional; intensity: 0.8" position="2 4 2"></a-entity>
+      </a-marker>
+
+      <!-- Камера -->
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <div class="hint">Если модель не видна: убедитесь, что <b>ar.glb</b> и <b>pattern-marker.patt</b> лежат рядом с этим <b>index.html</b>. Попробуйте изменить <b>scale</b> и <b>rotation</b> у сущности модели.</div>
+  </body>
+</html>
