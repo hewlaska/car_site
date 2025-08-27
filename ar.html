@@ -1,44 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
 <head>
-    <title>AR Model</title>
-    <link rel="icon" type="image/png" href="images/logo.png">
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
+    <meta charset="utf-8">
+    <link rel="icon" href="data:,">
+    <title>AR с кастомным маркером</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar/dist/mindar-image-aframe.prod.js"></script>
+
     <style>
-        /* Стили для ссылки */
-        #myLink {
-            position: fixed;       /* фиксированное позиционирование */
-            bottom: 10px;          /* отступ снизу */
-            left: 10px;            /* отступ слева */
-            color: white;          /* цвет текста */
-            background-color: rgba(0,0,0,0.5); /* полупрозрачный фон для читаемости */
-            padding: 5px 10px;     /* внутренние отступы */
-            text-decoration: none; /* убрать подчеркивание */
-            font-family: Arial, sans-serif;
-            border-radius: 5px;
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
-        #myLink:hover {
-            background-color: rgba(0,0,0,0.7);
+        a-scene {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hint {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: center;
+            z-index: 9999;
+        }
+
+        .hint a {
+            color: #ffd700;
+            text-decoration: none;
         }
     </style>
 </head>
 
-<body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs="sourceType: webcam; cameraParametersUrl: camera_para.dat; debugUIEnabled: false;">
+<body>
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: true">
+
         <!-- Камера -->
-        <a-marker type="pattern" url="ar/marker.patt">
-            <!-- 3D модель -->
-            <a-entity gltf-model="ar/ar.glb" scale="0.5 0.5 0.5" position="0 0 0" rotation="0 0 0">
-            </a-entity>
-        </a-marker>
-        <a-entity camera></a-entity>
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+        <!-- Маркер и модель -->
+        <a-entity mindar-image-target="targetIndex: 0">
+            <a-gltf-model src="./models/ar.glb" scale="0.5 0.5 0.5" position="0 0 0" rotation="0 0 0"></a-gltf-model>
+        </a-entity>
     </a-scene>
 
-    <!-- Ссылка в нижнем левом углу -->
-    <a href="index.html" id="myLink" target="_blank">Go to WebSite</a>
+    <div class="hint">
+        Наведите камеру на маркер. Подробнее на <a href="https://example.com" target="_blank">нашем сайте</a>
+    </div>
 </body>
 
 </html>
