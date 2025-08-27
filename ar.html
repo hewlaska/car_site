@@ -14,10 +14,11 @@
 
 <body>
     <a-scene mindar-image="imageTargetSrc: ./targets.mind;" 
-         color-space="sRGB"
-         renderer="colorManagement: true; physicallyCorrectLights: true;"
-         vr-mode-ui="enabled: false"
-         device-orientation-permission-ui="enabled: true">
+    color-space="sRGB"
+    renderer="colorManagement: true; physicallyCorrectLights: true; toneMapping: ACESFilmicToneMapping; exposure: 1.0;"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: true">
+
 
         <!-- Камера -->
          <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
