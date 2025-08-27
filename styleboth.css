@@ -9,6 +9,28 @@
   margin: 0 50px auto;
 }
 
+/* При ширине меньше 768px */
+@media (max-width: 768px) {
+  .history {
+    margin: 0 20px auto;
+  }
+
+  .history p {
+    margin: 0 40px 10px; /* уменьшаем отступы */
+  }
+}
+
+/* При ширине меньше 480px */
+@media (max-width: 480px) {
+  .history {
+    margin: 0 10px auto;
+  }
+
+  .history p {
+    margin: 0 20px 10px; /* еще меньше */
+  }
+}
+
 .title {
   text-align: center;
   padding: 10px;
@@ -37,6 +59,11 @@ body {
   left: 0;
   z-index: 1000;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px; /* фиксируем высоту */
+  box-sizing: border-box; /* чтобы паддинги учитывались */
 }
 
 .h1 {
@@ -50,18 +77,60 @@ nav {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
   gap: 30px;
-   font-size: 16px;
+  font-size: 16px;
 }
 
 nav a {
   color: #ccc;
   text-decoration: none;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #fff;
 }
 
 nav a.active {
   color: #fff;
 }
+
+.burger {
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: none; /* скрываем бургер на больших */
+  margin-right: 20px;
+}
+
+/* --- адаптив --- */
+@media (max-width: 1000px) {
+  .burger {
+    display: block; /* показываем бургер */
+  }
+
+  nav {
+    display: none; /* меню скрыто */
+    position: absolute;
+    top: 50px;
+    left: 0;
+    transform: none;
+    width: 100%;
+    flex-direction: column;
+    background: #222;
+    padding: 10px 0;
+    gap: 15px;
+    text-align: center;
+  }
+
+  nav.show {
+    display: flex; /* показываем меню при клике */
+  }
+}
+
 
 .site-footer {
   margin-top: 20px;
